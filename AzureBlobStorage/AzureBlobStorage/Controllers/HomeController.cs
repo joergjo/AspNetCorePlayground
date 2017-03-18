@@ -15,16 +15,8 @@ namespace AzureBlobStorage.Controllers
 
         public HomeController(CloudBlobContainer container, ILogger<HomeController> logger)
         {
-            if (container == null)
-            {
-                throw new ArgumentNullException(nameof(container));
-            }
-            if (logger == null)
-            {
-                throw new ArgumentNullException(nameof(logger));
-            }
-            _container = container;
-            _logger = logger;
+            _container = container ?? throw new ArgumentNullException(nameof(container));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public ViewResult Index() => View();
