@@ -1,0 +1,24 @@
+﻿@model MediaItemViewModel
+@{
+    ViewData["Title"] = "My Media";
+    int rows = (int) Math.Ceiling(Model.MediaItems.Count / 3.0);
+}
+
+@for (int row = 0, index = 0; row < rows; row++)
+{
+    <div class="row">
+        @for (int col = 0; col < 3 && index < Model.MediaItems.Count; col++, index++)
+        {
+            <div class="col-md-4">
+                @if (Model.MediaItems[index].ContentType.StartsWith("video"))
+                {
+                    <video class="sm" autoplay controls loop muted src="@Model.MediaItems[index].Uri" />
+                }
+                else
+                {
+                    <img class="sm" src="@Model.MediaItems[index].Uri" />
+                }
+            </div>
+        }
+    </div>
+}
